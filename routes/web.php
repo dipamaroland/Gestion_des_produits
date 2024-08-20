@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProduitController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,18 +14,23 @@ use App\Http\Controllers\ProduitController;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/',[ProduitController::class,'index'])->name('produits.index'); 
+Route::get('/dashboard', [ProduitController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/produits/create',[ProduitController::class,'create'])->name('produits.create'); 
-Route::post('/produits/store',[ProduitController::class,'store'])->name('produits.store'); 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/produits', [ProduitController::class, 'index'])->name('produits.index');
+    Route::get('/produits/create', [ProduitController::class, 'create'])->name('produits.create');
+    Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
+    Route::get('/produits/{id}/edit', [ProduitController::class, 'edit'])->name('produits.edit');
+    Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
+    Route::delete('/produits/{id}', [ProduitController::class, 'destroy'])->name('produits.destroy');
 
-Route::get('/produits/{produit}/edit',[ProduitController::class,'edit'])->name('produits.edit');
-Route::put('/produits/update/{id}',[ProduitController::class,'update'])->name('produits.update');
+});
 
-
-Route::delete('/produits/destroy/{id}',[ProduitController::class,'destroy'])->name('produits.destroy');
-
-
-
-
+require __DIR__.'/auth.php';
