@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produit;
+use App\Models\User;
 
 class ProduitController extends Controller
 {
@@ -16,6 +17,15 @@ class ProduitController extends Controller
             return view('produits.index',compact('produits'))->with('success','');
 
         }
+
+        public function welcome()
+     {
+
+         $users = User::all();
+
+         return view('welcome',compact('users'))->with('success','');
+
+     }
 
         // Afficher le formulaire de création d'un nouveau produit
         public function create()
@@ -41,7 +51,7 @@ class ProduitController extends Controller
         // Afficher le formulaire d'édition d'un produit
         public function edit($id)
         {
-           // $produits = Produit::findOrFail($produits);
+           
             $produit = Produit::find($id);
             return view('produits.edit', compact('produit'));
         }

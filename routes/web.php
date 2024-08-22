@@ -16,14 +16,19 @@ use App\Http\Controllers\ProduitController;
 
 Route::get('/', function () {
     return view('welcome');
+
 });
 
 Route::get('/dashboard', [ProduitController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [ProduitController::class, 'welcome'])->name('welcome');
+Route::get('/profile/', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/', [ProfileController::class, 'update'])->name('profile.update');
+Route::delete('/profile/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
     Route::get('/produits', [ProduitController::class, 'index'])->name('produits.index');
     Route::get('/produits/create', [ProduitController::class, 'create'])->name('produits.create');
     Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
