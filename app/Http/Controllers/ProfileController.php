@@ -30,17 +30,17 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+      
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed'],
+            'email' => ['required', 'string']
+            
         ]);
 
         $user = User::find($id);
         $user->update($request->all());
         
-        $request->user()->save();
+       // $request->user()->save();
 
         return redirect()->route('welcome')->with('success', 'Utilisateur mis à jour avec succès.');
 

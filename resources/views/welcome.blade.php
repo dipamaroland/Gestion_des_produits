@@ -58,7 +58,7 @@
                             <td class="py-2">{{ $user->name }}</td>
                             <td class="py-2">{{ $user->email }}</td>
                             <td class="py-2 flex">
-                                <a href="{{ route('profile.edit', $user->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2">Modifier</a>
+                                <a href="{{ route('user.edit', $user->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2">Modifier</a>
                                 </dt>
                                 <tb>  </tb>
                                 <td>

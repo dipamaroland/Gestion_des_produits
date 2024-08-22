@@ -2,19 +2,13 @@
 
 @section('content')
 
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
 <div class="container mx-auto px-4 py-6 flex justify-center">
     <div class="w-full max-w-lg">
     <h1 class="text-2xl font-bold mb-4">Modifier les informations d'un utilisateur</h1>
 
-        <form action="{{ route('profile.update', $user->id) }}" method="POST">
+        <form action="{{ route('user.update', $user->id) }}" method="POST">
             @csrf
-            @method('PUT')
+          
 
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium">Nom et Prénom</label>
@@ -31,6 +25,6 @@
     </div>
 </div>
    
-</x-app-layout>
+
 
 @endsection

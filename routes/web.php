@@ -21,8 +21,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [ProduitController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/', [ProduitController::class, 'welcome'])->name('welcome');
-Route::get('/profile/', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::put('/profile/', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/user/{id}', [ProfileController::class, 'edit'])->name('user.edit');
+Route::post('/user/{id}', [ProfileController::class, 'update'])->name('user.update');
 Route::delete('/profile/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
